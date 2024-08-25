@@ -74,3 +74,4 @@ end
 gem "slim-rails"
 gem "html2slim"
 gem "bootstrap"
+gem "dartsass-rails", "~> 0.5.1"
