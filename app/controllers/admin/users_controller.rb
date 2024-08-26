@@ -1,5 +1,9 @@
 class Admin::UsersController < ApplicationController
+
+  before_action :set_user, only: [:edit, :update, :show]
+
   def index
+    @users = User.all
   end
 
   def new
@@ -18,12 +22,30 @@ class Admin::UsersController < ApplicationController
   def edit
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to admin_user_path(@user), notice: "ユーザー「#{@user.name}」を更新しました。"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def show
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    redirect_to admin_users_path, notice: "ユーザー「#{user.name}」を削除しました。"
   end
 
   private
   
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
