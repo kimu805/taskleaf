@@ -10,14 +10,14 @@ module Taskleaf
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.generators do |g|
-      g.helper          false
-      g.test_framework  false
-			# stylesheets, javascripts, images, etc.
-      g.assets          false
-			# not auto generate all the routes
-      g.skip_routes     true
-    end
+    # config.generators do |g|
+    #   g.helper          false
+    #   g.test_framework  false
+		# 	# stylesheets, javascripts, images, etc.
+    #   g.assets          false
+		# 	# not auto generate all the routes
+    #   g.skip_routes     true
+    # end
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
