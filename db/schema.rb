@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_25_100038) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_26_070023) do
   create_table "tasks", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 30, null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
