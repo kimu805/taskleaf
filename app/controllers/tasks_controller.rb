@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 
-  before_action :set_task, only: [:show]
+  before_action :set_task, only: [:show, :edit, :update]
 
   def index
     @tasks = Task.all
@@ -22,11 +22,19 @@ class TasksController < ApplicationController
   def edit
   end
 
+  def update
+    if @task.update(task_params)
+      redirect_to root_path, notice: "タスク「#{@task.name}」を更新しました。"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def show
   end
 
   private
-  
+
   def task_params
     params.require(:task).permit(:name, :description)
   end
