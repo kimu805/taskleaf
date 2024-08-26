@@ -33,6 +33,12 @@ class TasksController < ApplicationController
   def show
   end
 
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
+    redirect_to root_path, notice: "タスク「#{task.name}」を削除しました。"
+  end
+
   private
 
   def task_params
