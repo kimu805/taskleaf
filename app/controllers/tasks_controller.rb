@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
 
-  before_action :set_task, only: [:show, :edit, :update]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.recent
   end
 
   def new
@@ -34,9 +34,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = current_user.tasks.find(params[:id])
-    task.destroy
-    redirect_to root_path, notice: "タスク「#{task.name}」を削除しました。"
+    @task.destroy
+    redirect_to root_path, notice: "タスク「#{@task.name}」を削除しました。"
   end
 
   private
