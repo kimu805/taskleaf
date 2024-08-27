@@ -3,15 +3,15 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update]
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
     if @task.save
       redirect_to root_path, notice: "タスク「#{@task.name}」を登録しました。"
     else
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.destroy
     redirect_to root_path, notice: "タスク「#{task.name}」を削除しました。"
   end
@@ -46,6 +46,6 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 end
