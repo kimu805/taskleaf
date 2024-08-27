@@ -6,6 +6,3 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-6.times do |i|
-  Task.create(name: "タスク#{i}", description: "タスク#{i}の説明")
-end
