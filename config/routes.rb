@@ -7,12 +7,5 @@ Rails.application.routes.draw do
     resources :users
   end
   root to: "tasks#index"
-  resources :tasks do
-    collection do
-      post :confirm_new
-    end
-    member do
-      patch :confirm_edit
-    end
-  end
+  resources :tasks
 end
