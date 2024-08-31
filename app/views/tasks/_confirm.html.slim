@@ -1,0 +1,17 @@
+= form_with model: task, local: true do |f|
+  table.table.table-hover 
+    tbody 
+      tr 
+        th= Task.human_attribute_name(:name)
+        td= task.name
+        = f.hidden_field :name
+      tr 
+        th= Task.human_attribute_name(:description)
+        td= simple_format(task.description)
+        = f.hidden_field :description
+
+  = f.submit "戻る", name: "back", class: "btn btn-secondary me-3", data: {turbo: false}
+  - if request.path_info == confirm_new_task_path 
+    = f.submit "登録", class: "btn btn-primary"
+  - elsif request.path_info == confirm_edit_task_path 
+    = f.submit "更新", class: "btn btn-primary"
