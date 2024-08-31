@@ -10,8 +10,19 @@ class TasksController < ApplicationController
     @task = current_user.tasks.new
   end
 
+  def confirm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
+  end
+
   def create
     @task = current_user.tasks.new(task_params)
+
+    if params[:back].present?
+      render :new
+      return
+    end
+    
     if @task.save
       redirect_to root_path, notice: "タスク「#{@task.name}」を登録しました。"
     else
