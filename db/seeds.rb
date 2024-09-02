@@ -9,7 +9,7 @@
 User.create(name: "admin", email: "admin@admin.com", admin: true, password: "111111", password_confirmation: "111111")
 User.create(name: "test1", email: "test1@test.com", admin: false, password: "111111", password_confirmation: "111111")
 
-5.times do |i|
+50.times do |i|
   Task.create(name: "admin_task#{i+1}", description: "Description of admin_task#{i+1}", user_id: 1)
   Task.create(name: "task#{i+1}", description: "Description of task#{i+1}", user_id: 2)
 end

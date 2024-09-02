@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   root to: "tasks#index"
   resources :tasks do
+    post :import, on: :collection
     post :confirm, action: :confirm_new, on: :new
     member do
       patch :confirm_edit

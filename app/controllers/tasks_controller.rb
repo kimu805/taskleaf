@@ -5,6 +5,11 @@ class TasksController < ApplicationController
   def index
     @q = current_user.tasks.ransack(params[:q])
     @tasks = @q.result(distinct: true)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @tasks.generate_csv, filename: "tasks-#{Time.zone.now.strftime("%Y%m%d%S")}.csv" }
+    end
   end
 
   def new
@@ -60,6 +65,15 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to root_path, notice: "タスク「#{@task.name}」を削除しました。"
+  end
+
+  def import
+    if params[:file] == nil
+      flash.notice = "CSVファイルを選択してください"
+      return
+    end
+    current_user.tasks.import(params[:file])
+    redirect_to root_path, notice: "タスクを追加しました"
   end
 
   private
