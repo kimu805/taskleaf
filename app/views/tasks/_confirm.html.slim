@@ -1,4 +1,4 @@
-= form_with model: task, local: true, multipart: true  do |f|
+= form_with model: task, local: true do |f|
   table.table.table-hover 
     tbody 
       tr 
@@ -9,10 +9,6 @@
         th= Task.human_attribute_name(:description)
         td= simple_format(task.description)
         = f.hidden_field :description
-      tr 
-        th= Task.human_attribute_name(:image)
-        td= image_tag(task.image) if task.image.attached?
-        = f.hidden_field :image
 
   = f.submit "戻る", name: "back", class: "btn btn-secondary me-3", data: {turbo: false}
   - if request.path_info == confirm_new_task_path 
