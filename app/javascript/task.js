@@ -1,7 +1,9 @@
 const destroy = () => {
   document.querySelectorAll(".delete").forEach(function(a) {
     a.addEventListener("click", function() {
-      var td = a.parentNode
+      console.log("読み込み完了")
+      var frameTag = a.parentNode
+      var td = frameTag.parentNode
       var tr = td.parentNode
       tr.style.display = "none"
     })
