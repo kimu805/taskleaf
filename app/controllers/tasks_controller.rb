@@ -64,7 +64,10 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    head :no_content
+    respond_to do |format|
+      format.html { redirect_to task_path(@task), notice: "タスク#{@task.name}を削除しました。" }
+      format.turbo_stream # Turboに対応するためのフォーマット
+    end
   end
 
   def import
