@@ -6,7 +6,7 @@ function preview() {
 
   const buildPreviewImage = (dataIndex, blob) => {
     const preview = document.createElement("div")
-    preview.setAttribute("class", "preview mt-3 d-flex flex-row me-3")
+    preview.setAttribute("class", "preview mt-3 me-3")
     preview.setAttribute("data-index", dataIndex)
 
     const previewImage = document.createElement("img")
@@ -30,6 +30,8 @@ function preview() {
     const nextDataIndex = Number(lastFileField.getAttribute('data-index')) +1;
     newFileField.setAttribute('data-index', nextDataIndex);
 
+    newFileField.addEventListener("change", changeFileField)
+
     const fileFieldArea = document.querySelector(".images")
     fileFieldArea.appendChild(newFileField)
   }
@@ -37,15 +39,21 @@ function preview() {
   const changeFileField = (e) => {
     const dataIndex = e.target.getAttribute('data-index');
 
-    const alreadyPreview = document.querySelector(".preview")
-    if (alreadyPreview) alreadyPreview.remove()
-
     const file = e.target.files[0]
     const blob = window.URL.createObjectURL(file)
+
+    const alreadyPreview = document.querySelector(`.preview[data-index="${dataIndex}"]`)
+    if (alreadyPreview) {
+      const alreadyPreviewImage = alreadyPreview.querySelector("img")
+      alreadyPreviewImage.setAttribute("src", blob)
+      return null
+    }
 
     buildPreviewImage(dataIndex, blob)
     buildNewFileField()
   }
+
+  
 
   taskImage.addEventListener("change", changeFileField)
 }
