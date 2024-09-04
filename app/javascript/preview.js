@@ -13,7 +13,7 @@ function preview() {
     const blob = URL.createObjectURL(file)
 
     const preview = document.createElement("div")
-    preview.setAttribute("class", "preview mt-3")
+    preview.setAttribute("class", "preview mt-3 d-flex flex-row me-3")
 
     const previewImage = document.createElement("img")
     previewImage.setAttribute("src", blob)
