@@ -4,19 +4,27 @@ function preview() {
 
   if (!previews) return null
 
+  const imageLimits = 3
+
   const buildPreviewImage = (dataIndex, blob) => {
     const preview = document.createElement("div")
     preview.setAttribute("class", "preview mt-3 me-3")
     preview.setAttribute("data-index", dataIndex)
 
     const previewImage = document.createElement("img")
-    previewImage.setAttribute("class", "preview-image")
+    previewImage.setAttribute("class", "preview-image d-block")
     previewImage.setAttribute("src", blob)
     previewImage.setAttribute("alt", "画像プレビュー")
     previewImage.setAttribute("width", "300")
     previewImage.setAttribute("height", "200")
 
+    const deleteButton = document.createElement("div")
+    deleteButton.setAttribute("class", "btn btn-secondary")
+    deleteButton.innerHTML = "削除"
+    deleteButton.addEventListener("click", () => deleteImage(dataIndex))
+
     preview.appendChild(previewImage)
+    preview.appendChild(deleteButton)
     previews.appendChild(preview)
   }
 
@@ -36,10 +44,26 @@ function preview() {
     fileFieldArea.appendChild(newFileField)
   }
 
+  const deleteImage = (dataIndex) => {
+    const deletePreviewImage = document.querySelector(`.preview[data-index="${dataIndex}"]`)
+    deletePreviewImage.remove()
+    const deleteFileField = document.querySelector(`input[type="file"][data-index="${dataIndex}"]`)
+    deleteFileField.remove()
+
+    const imageCount = document.querySelectorAll(".preview").length
+    if (imageCount == imageLimits - 1) buildNewFileField()
+    
+  }
+
   const changeFileField = (e) => {
     const dataIndex = e.target.getAttribute('data-index');
 
     const file = e.target.files[0]
+    if (!file) {
+      deleteImage(dataIndex)
+      return null
+    }
+
     const blob = window.URL.createObjectURL(file)
 
     const alreadyPreview = document.querySelector(`.preview[data-index="${dataIndex}"]`)
@@ -50,7 +74,9 @@ function preview() {
     }
 
     buildPreviewImage(dataIndex, blob)
-    buildNewFileField()
+
+    const imageCount = document.querySelectorAll(".preview").length
+    if (imageCount < imageLimits) buildNewFileField()
   }
 
   
