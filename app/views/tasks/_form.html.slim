@@ -10,8 +10,8 @@
   .form-group
     = f.label :description
     = f.text_area :description, rows: 5, class: "form-control", id: "task_description"
-  .form-group 
+  .form-group.images
     = f.label :image
-    = f.file_field :image, class: "form-control", id: "task_image"
-    div id= "previews"
+    = f.file_field :image, name: "task[images][]", data: { index: 0 }, class: "form-control", id: "task_image"
+    div id= "previews" class= "d-flex flex-row"
   = f.submit nil , class: "btn btn-primary mt-3"

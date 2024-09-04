@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
-  has_one_attached :image
+  has_many_attached :images
+  validates :images, length: { maximum: 3 }
 
   scope :recent, -> { order(created_at: :desc) }
 

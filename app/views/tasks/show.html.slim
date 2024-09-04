@@ -10,9 +10,11 @@ table.table.table-hover
     tr 
       th= Task.human_attribute_name(:name)
       td= @task.name
-    tr 
-      th= Task.human_attribute_name(:image)
-      td= image_tag @task.image.variant(resize: "400x400") if @task.image.attached?
+    - if @task.images.attached?
+      tr 
+        th= Task.human_attribute_name(:image)
+        - @task.images[0..-1].each do |image|
+          td= image_tag image.variant(resize: "200x200")
     tr 
       th= Task.human_attribute_name(:description)
       td= auto_link(simple_format(h(@task.description), {}, sanitize: false, wrapper_tag: "div"))
