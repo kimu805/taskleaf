@@ -19,12 +19,9 @@ describe "タスク管理機能", type: :system do
         # 登録フォームに値を入力する。
         fill_in "名称", with: @task.name
         fill_in "詳しい説明", with: @task.description
-        # 確認ボタンを押すと、入力した情報が表示される。
-        click_on "確認"
-        expect(page).to have_content(@task.name)
         # 登録ボタンを押すとタスクモデルのカウントが１上がることを確認する。
         expect{
-          click_on "登録"
+          click_on "登録する"
           sleep 1
         }.to change {@user.tasks.count}.by(1)
         # トップページに作成したタスクが表示されているのを確認する。
@@ -37,10 +34,10 @@ describe "タスク管理機能", type: :system do
         click_on "新規登録"
         fill_in "詳しい説明", with: @task.description
         expect{
-          click_on "確認"
+          click_on "登録する"
           sleep 1
         }.to change {@user.tasks.count}.by(0)
-        expect(page).to have_current_path(confirm_new_task_path)
+        expect(page).to have_current_path(new_task_path)
       end
     end
   end
