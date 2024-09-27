@@ -7,5 +7,10 @@
   },
   "devDependencies": {
     "webpack-dev-server": "^3"
-  }
+  },
+  "name": "taskleaf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kimu805/taskleaf.git",
+  "license": "MIT"
 }
