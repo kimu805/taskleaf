@@ -9,6 +9,7 @@ html
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload"
     / = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
+    = javascript_pack_tag "application"
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light.ms-3
       .navbar-brand Taskleaf
